@@ -1,0 +1,78 @@
+## 服务端口
+#server:
+#  port: 8005
+#
+#spring:
+#  #redis配置
+#  redis:
+#    host: 175.178.189.89
+#    port: 12207
+#    database: 0
+#    timeout: 1800000
+#    lettuce:
+#      pool:
+#        max-active: 20
+#        max-wait: -1
+#        #最大阻塞等待时间(负数表示没限制)
+#        max-idle: 5
+#        min-idle: 0
+#    password: 12207
+#
+#  # nacos服务地址
+#  cloud:
+#    nacos:
+#      discovery:
+#        server-addr: 175.178.189.89:12208
+#  # 服务名
+#  application:
+#    name: service-msm
+#  # 环境设置：dev、test、prod
+#  profiles:
+#    active: dev
+#  # mysql数据库连接
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/mogu?serverTimezone=GMT%2B8
+#    username: root
+#    password: root
+#  #json时间格式
+#  jackson:
+#    date-format: yyyy-MM-dd HH:mm:ss
+#    time-zone: GMT+8
+#
+#mybatis-plus:
+#  #mybatis日志
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+##豪猪哥配置
+##开启熔断机制
+#feign:
+#  hystrix:
+#    enabled: true
+##设置hystrix超时时间，默认1000ms
+#hystrix:
+#  command:
+#    default:
+#      execution:
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 6000
+#
+#
+#tx:
+#  sms:
+#    #密钥对secretId 和 secretKey
+#    secretId: AKIDJRJvIODl23nGSN1PWOzg6F7i25rNcZGg
+#    secretKey: B6k9H7gz1mGTP4TbT3MO9dqmSr1vYu0p
+#    #签名参数使用的是`签名内容`
+#    signName: 蘑菇记
+#    #短信模板 ID，需要在短信应用中申请
+#    templateId: 1358235
+#    #短信应用 SDK AppID
+#    sdkAppId: 1400658953
+#
+#
+##
+##logging:
+##  level:
+##    root: debug
