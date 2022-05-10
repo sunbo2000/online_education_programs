@@ -105,7 +105,6 @@ public class UCenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, U
 
         //都无误,添加到数据库
         UcenterMember member = new UcenterMember();
-//        BeanUtils.copyProperties(registerVo,member);
         member.setMobile(mobile);
         member.setNickname(nickname);
         member.setPassword(MD5Utils.encrypt(password));
@@ -115,11 +114,15 @@ public class UCenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, U
     }
 
 
-    //根据id获取是否登录信息
+    /**
+     * 根据id获取是否登录信息
+     */
     @Override
     public LoginInfoVo getLoginInfo(HttpServletRequest request) {
-        //每登录一次,登录记录加一
         String memberId = JwtUtils.getMemberIdByJwtToken(request);
+        if (StringUtils.isEmpty(memberId)) {
+            throw new MoguException(28004, "未登录");
+        }
         UcenterMember member = baseMapper.selectById(memberId);
         LoginInfoVo loginInfoVo = new LoginInfoVo();
         BeanUtils.copyProperties(member, loginInfoVo);

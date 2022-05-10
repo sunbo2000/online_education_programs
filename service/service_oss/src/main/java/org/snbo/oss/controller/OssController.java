@@ -23,7 +23,9 @@ public class OssController {
 
     @Autowired
     private OssService ossService;
-    //上传头像
+    /**
+     * 上传头像
+     */
     @ApiModelProperty("上传图像")
     @PostMapping
     public R uploadOssFile(MultipartFile file ){

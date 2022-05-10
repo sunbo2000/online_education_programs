@@ -65,7 +65,7 @@ public class EduCommentServiceImpl extends ServiceImpl<EduCommentMapper, EduComm
             //评论放入评论集合中
             commentPartList.add(commentPart);
 
-            //每次先查询出四条回复
+            //每次先查询出三条回复
             QueryWrapper<EduComment> wrapper = new QueryWrapper<>();
             wrapper.eq("part_id", comment.getId());
             wrapper.orderByDesc("gmt_create");
