@@ -53,8 +53,9 @@ public class VodController {
         }
     }
 
-    //@RequestParam 也是post或put请求,但类型不是json
-    //@RequestBody 是json数据通过post或put请求提交时用来接收的
+    /**
+     * @RequestBody 是json数据通过post或put请求提交时用来接收的
+     */
     @DeleteMapping
     @ApiOperation(value = "批量删除阿里云视频")
     public R deleteVideoByIds(@RequestParam("videoIdList") List<String> videoIdList) {

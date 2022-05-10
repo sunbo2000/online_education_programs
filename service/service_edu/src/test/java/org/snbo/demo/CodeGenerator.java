@@ -9,7 +9,10 @@ import com.baomidou.mybatisplus.generator.config.PackageConfig;
 import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
+import org.apache.poi.ss.formula.functions.T;
 import org.junit.Test;
+
+import java.sql.Date;
 
 /**
  * @author
@@ -28,7 +31,7 @@ public class CodeGenerator {
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");
         /* 项目路径,可能要改的地方 */
-        gc.setOutputDir("D:\\A.Code\\A.project\\mogu_parent\\org.snbo.aclService.service\\service_edu" + "/src/main/java");
+        gc.setOutputDir("D:\\A.Code\\A.project\\mogu_parent\\service\\service_edu" + "/src/main/java");
 
         gc.setAuthor("snbo");
         gc.setOpen(false); //生成后是否打开资源管理器
@@ -54,16 +57,16 @@ public class CodeGenerator {
         /* 模块名,可能要改的地方 */
         pc.setModuleName("eduService");
         pc.setParent("org.snbo");
-        pc.setController("org.snbo.aclService.controller");
-        pc.setEntity("org.snbo.aclService.bean");
-        pc.setService("org.snbo.aclService.service");
-        pc.setMapper("org.snbo.aclService.mapper");
+        pc.setController("controller");
+        pc.setEntity("bean");
+        pc.setService("service");
+        pc.setMapper("mapper");
         mpg.setPackageInfo(pc);
 
         // 5、策略配置
         StrategyConfig strategy = new StrategyConfig();
         /* 数据库表名,要改的地方 */
-        strategy.setInclude("edu_comment");
+        strategy.setInclude("edu_qa");
         strategy.setNaming(NamingStrategy.underline_to_camel);//数据库表映射到实体的命名策略
         strategy.setTablePrefix(pc.getModuleName() + "_"); //生成实体时去掉表前缀
 
@@ -74,7 +77,6 @@ public class CodeGenerator {
         strategy.setControllerMappingHyphenStyle(true); //url中驼峰转连字符
 
         mpg.setStrategy(strategy);
-
 
         // 6、执行
         mpg.execute();

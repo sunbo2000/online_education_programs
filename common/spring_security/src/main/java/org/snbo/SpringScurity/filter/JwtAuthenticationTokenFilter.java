@@ -36,14 +36,14 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         //获取token
-        String token =request.getHeader("token");
+        String token = request.getHeader("token");
         //如果token为空
-        if (!StringUtils.hasText(token)){
+        if (!StringUtils.hasText(token)) {
             //放行
-            filterChain.doFilter(request,response);
+            filterChain.doFilter(request, response);
             return;
         }
-        if (tokenManager.checkToken(token)){
+        if (tokenManager.checkToken(token)) {
             //解析token
             String userName = tokenManager.getUserFromToken(token);
 
@@ -52,7 +52,9 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
                 List<String> permissionValueList = (List<String>) redisTemplate.opsForValue().get(userName);
                 Collection<GrantedAuthority> authorities = new ArrayList<>();
                 for (String permissionValue : permissionValueList) {
-                    if (StringUtils.isEmpty(permissionValue)) continue;
+                    if (StringUtils.isEmpty(permissionValue)) {
+                        continue;
+                    }
                     SimpleGrantedAuthority authority = new SimpleGrantedAuthority(permissionValue);
                     authorities.add(authority);
                 }
