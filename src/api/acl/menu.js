@@ -12,20 +12,20 @@ export default {
   removeById(id) {
     return request({
       url: `${api_name}/remove/${id}`,
-      method: "delete"
+      method: 'delete'
     })
   },
   saveLevelOne(menu) {
     return request({
       url: `${api_name}/save`,
-      method: "post",
+      method: 'post',
       data: menu
     })
   },
   update(menu) {
     return request({
       url: `${api_name}/update`,
-      method: "put",
+      method: 'put',
       data: menu
     })
   },
@@ -38,8 +38,8 @@ export default {
   doAssign(roleId, permissionId) {
     return request({
       url: `${api_name}/doAssign`,
-      method: "post",
-      params: {roleId, permissionId}
+      method: 'post',
+      params: { roleId, permissionId }
     })
   }
 }

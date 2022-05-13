@@ -9,7 +9,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: '蘑菇学院',
+  name: 'Mogu',
   computed: {
     ...mapGetters([
       'name',
@@ -24,6 +24,7 @@ export default {
   &-container {
     margin: 30px;
   }
+
   &-text {
     font-size: 30px;
     line-height: 46px;

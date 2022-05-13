@@ -2,7 +2,8 @@
   <div class="app-container">
     <!-- ************************************************************************* -->
     <el-button type="primary" icon="el-icon-upload2" @click="openSaveInfo"
-      >新增</el-button
+    >新增
+    </el-button
     >
     <!-- ************************************************************************** -->
     <!-- 章节嵌套表单 -->
@@ -29,7 +30,7 @@
             :on-success="handleAvatarSuccess"
             :before-upload="beforeAvatarUpload"
           >
-            <img :src="banner.imageUrl" style="width: 300px; height: 168px" />
+            <img :src="banner.imageUrl" style="width: 300px; height: 168px"/>
           </el-upload>
         </el-form-item>
 
@@ -37,7 +38,8 @@
           label="链接地址"
           :label-width="formLabelWidth"
           prop="linkUrl"
-          ><el-input v-model="banner.linkUrl" auto-complete="off"></el-input>
+        >
+          <el-input v-model="banner.linkUrl" auto-complete="off"></el-input>
         </el-form-item>
 
         <el-form-item label="封面排序" :label-width="formLabelWidth">
@@ -51,7 +53,8 @@
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
         <el-button type="primary" @click="submitForm('banner')"
-          >确 定</el-button
+        >确 定
+        </el-button
         >
       </div>
     </el-dialog>
@@ -67,7 +70,7 @@
           {{ (pageCurrent - 1) * pageSize + scope.$index + 1 }}
         </template>
       </el-table-column>
-      <el-table-column prop="title" label="封面标题" width="200" />
+      <el-table-column prop="title" label="封面标题" width="200"/>
 
       <el-table-column label="封面图片" width="310" align="center">
         <template slot-scope="scope">
@@ -104,13 +107,15 @@
             type="primary"
             icon="el-icon-edit"
             @click="openUpdateInfo(scope.row.id)"
-            >修改</el-button
+          >修改
+          </el-button
           >
           <el-button
             type="danger"
             icon="el-icon-delete"
             @click="removeById(scope.row.id)"
-            >删除</el-button
+          >删除
+          </el-button
           >
         </template>
       </el-table-column>
@@ -140,7 +145,7 @@
 </style>
 
 <script>
-import banner from "@/api/edu/banner";
+import banner from '@/api/edu/banner'
 
 export default {
   //写代码
@@ -148,7 +153,7 @@ export default {
     return {
       BASE_API: process.env.BASE_API,
       dialogFormVisible: false, //表单显示
-      formLabelWidth: "120px",
+      formLabelWidth: '120px',
       pageCurrent: 1, //当前页
       pageSize: 4, //每页条数
       //绑定后其实不需要在里面定义属性,会自己注入
@@ -157,132 +162,133 @@ export default {
       banner: {},
       rules: {
         title: [
-          { required: true, message: "请输入轮播图名称", tigger: "blur" },
+          { required: true, message: '请输入轮播图名称', tigger: 'blur' }
         ],
         linkUrl: [
-          { required: true, message: "请输入链接地址", tigger: "blur" },
+          { required: true, message: '请输入链接地址', tigger: 'blur' }
         ],
         imageUrl: [
-          { required: true, message: "请输入链接地址", tigger: "blur" },
-        ],
-      },
-    };
+          { required: true, message: '请输入链接地址', tigger: 'blur' }
+        ]
+      }
+    }
   },
   created() {
-    this.getList();
+    this.getList()
   },
   methods: {
     //给表格增加颜色的方法
     tableRowClassName({ row, rowIndex }) {
       if (rowIndex % 4 === 1) {
-        return "warning-row";
+        return 'warning-row'
       } else if (rowIndex % 4 === 3) {
-        return "success-row";
+        return 'success-row'
       }
-      return "";
+      return ''
     },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           //   //进行添加或修改操作
-          this.saveOrUpdate();
+          this.saveOrUpdate()
           //   console.log("success");
         } else {
-          console.log("表单内容输入有误,检查下吧");
-          return false;
+          console.log('表单内容输入有误,检查下吧')
+          return false
         }
-      });
+      })
     },
     saveOrUpdate() {
       if (!this.banner.id) {
-        this.saveInfo();
+        this.saveInfo()
       } else {
-        this.updateInfo();
+        this.updateInfo()
       }
     },
     updateInfo() {
       banner.updateBanner(this.banner).then((response) => {
-        this.$message.success("修改轮播图成功");
-        this.dialogFormVisible = false;
-        this.getList();
-      });
+        this.$message.success('修改轮播图成功')
+        this.dialogFormVisible = false
+        this.getList()
+      })
     },
     saveInfo() {
       banner.saveBannerInfo(this.banner).then((response) => {
-        this.$message.success("添加轮播图成功");
-        this.dialogFormVisible = false;
-        this.getList();
-      });
+        this.$message.success('添加轮播图成功')
+        this.dialogFormVisible = false
+        this.getList()
+      })
     },
     //弹出修改框
     openUpdateInfo(id) {
       banner.getBannerById(id).then((response) => {
-        this.banner = response.data.banner;
-      });
-      this.dialogFormVisible = true;
+        this.banner = response.data.banner
+      })
+      this.dialogFormVisible = true
     },
     //上传封面之前调用
     beforeAvatarUpload(file) {
-      const isJPG = file.type === "image/jpeg";
+      const isJPG = file.type === 'image/jpeg'
       const isJPG1 = file.type === 'image/jpg'
       const isPNG = file.type === 'image/png'
-      const isLt2M = file.size / 1024 / 1024 < 5;
+      const isLt2M = file.size / 1024 / 1024 < 5
       if (!isJPG && !isJPG1 && !isPNG) {
-        this.$message.error("上传封面只能是 JPG/PNG 格式!");
+        this.$message.error('上传封面只能是 JPG/PNG 格式!')
       }
       if (!isLt2M) {
-        this.$message.error("上传封面大小不能超过 5MB!");
+        this.$message.error('上传封面大小不能超过 5MB!')
       }
-      return (isJPG || isJPG1 || isPNG) && isLt2M;
+      return (isJPG || isJPG1 || isPNG) && isLt2M
     },
     //上传封面成功回调方法
     handleAvatarSuccess(res, file) {
-      this.banner.imageUrl = res.data.url;
+      this.banner.imageUrl = res.data.url
     },
     //弹出新增表单
     openSaveInfo() {
       this.banner = {
         imageUrl:
-          "https://edu-mogu.oss-cn-chengdu.aliyuncs.com/%E4%B8%8A%E4%BC%A0.png",
-        sort: 0,
-      };
-      this.dialogFormVisible = true;
+          'https://edu-mogu.oss-cn-chengdu.aliyuncs.com/%E4%B8%8A%E4%BC%A0.png',
+        sort: 0
+      }
+      this.dialogFormVisible = true
     },
     //添加banner数据
     saveBannerInfo() {
       banner.saveBannerInfo(banner).then((response) => {
-        this.$message.success("添加轮播图成功");
-        this.getList();
-      });
+        this.$message.success('添加轮播图成功')
+        this.getList()
+      })
     },
     //Current 表示当前查询的页码值,它的值是自动封装识别的,em 甚至可以不要 data 里的 pageCurrent
     getList(Current = 1) {
-      this.pageCurrent = Current;
+      this.pageCurrent = Current
       banner
         .getPageBannerInfo(Current, this.pageSize)
         .then((response) => {
-          this.bannerList = response.data.banners;
-          this.total = response.data.total;
+          this.bannerList = response.data.banners
+          this.total = response.data.total
         })
         .catch((error) => {
-          console.log(error);
-        });
+          console.log(error)
+        })
     },
     //根据 Id 删除数据
     removeById(id) {
-      this.$confirm("此操作将永久删除轮播图, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning",
+      this.$confirm('此操作将永久删除轮播图, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
       })
         .then(() => {
           banner.deleteBannerInfo(id).then((response) => {
-            this.$message.success("删除轮播图成功");
-            this.getList();
-          });
+            this.$message.success('删除轮播图成功')
+            this.getList()
+          })
         })
-        .catch(() => {});
-    },
-  },
-};
+        .catch(() => {
+        })
+    }
+  }
+}
 </script>
