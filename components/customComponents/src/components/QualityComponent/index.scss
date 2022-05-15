@@ -1,0 +1,69 @@
+.player-hidden {
+  display: none !important;
+}
+
+.quality-components {
+  float: right;
+  color: #fff;
+  height: 35px;
+  position: relative;
+  box-sizing: border-box;
+  margin-top: 4px;
+}
+
+.current-quality {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  cursor: pointer;
+}
+
+.quality-list {
+  position: absolute;
+  bottom: 46px;
+  display: none;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  li {
+    text-align: center;
+    width: 70px;
+    line-height: 30px;
+    background-color: rgba(0, 0, 0, .6);
+    cursor: pointer;
+    &.current {
+      color: #00c1de;
+    }
+    & + li {
+      border-top: 1px solid rgba(78, 78, 78, 0.3);
+    }
+    &:hover {
+      background-color: rgba(0, 0, 0, .5);
+    };
+  }
+}
+
+.quality-modal {
+  position: absolute;
+  bottom: 20%;
+  left:  5%;
+  background-color: rgba(0, 0, 0, .6);
+  border-radius: 5px;
+  color: #fff;
+  padding: 10px 15px;
+  font-size: 14px;
+  display: none;
+  span.current-quality-tag {
+    color: #00c1de;
+  }
+}
+@media(max-width: 768px) {
+  .current-quality {
+    width: 40px;
+  }
+  .quality-list li {
+    width: 45px;
+  }
+}

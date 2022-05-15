@@ -1,0 +1,74 @@
+.aliplayer-rotate-mirror {
+  float: right;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  height: 35px;
+  position: relative;
+  margin-top: 5px;
+  i {
+    color: #fff;
+    display: inline-block;
+    font-size: 22px;
+    display: block;
+    margin-top: 7px;
+    cursor: pointer;
+    margin-right: 10px;
+    &.icon-player-switch {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    @media (min-width: 768px) {
+      &:hover + .player-tooltip {
+        display: block;
+      }      
+    }
+  }
+  .mirror-option {
+    position: absolute;
+    background-color: #3c3c3c;
+    top: 0;
+    transform: translateY(-103%);
+    right: -20px;
+    .mirror-item {
+      font-size: 14px;
+      color: #ebecec;
+      line-height: 30px;
+      white-space: nowrap;
+      padding: 0 15px;
+      cursor: pointer;
+      user-select: none;
+      &[data-id="counterclockwise"] {
+        display: none;
+      }
+      &[data-id="clockwise"] {
+        display: none;
+      }
+      &.active {
+        background-color: rgba(216, 216, 216, 0.1);
+        color: #00c1de;
+      }
+    }
+  }
+  .player-tooltip {
+    &.counterclockwise {
+      left: -35px;
+    }
+    &.clockwise {
+      left: -5px;
+    }
+    &.switch {
+      right: 7px;
+    }
+  }
+  @media(max-width: 768px) {
+    .mirror-option {
+      .mirror-item[data-id="counterclockwise"] {
+        display: block;
+      }
+      .mirror-item[data-id="clockwise"] {
+        display: block;
+      }
+    }
+  }
+}
