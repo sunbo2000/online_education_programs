@@ -19,12 +19,16 @@ import java.util.Date;
 @Component
 public class TokenManager {
 
-    //token过期时间
+    /**
+     * token过期时间
+     */
     private long tokenExpiration = 24*60*60*1000;
 
     private String tokenSignKey = "ukc8BDbRigUfhenGokugpiufbaDaYkyukdhasg6pFfWgbfyuovbdhfbalshfdus2jZWLPO";
 
-    //使用jwt根据用户名生成token
+    /**
+     * 使用jwt根据用户名生成token
+     */
     public String createToken(String username) {
         String token = Jwts.builder().setSubject(username)
                 .setExpiration(new Date(System.currentTimeMillis() + tokenExpiration))
@@ -32,7 +36,9 @@ public class TokenManager {
         return token;
     }
 
-    //从token中获取用户名
+    /**
+     * 从token中获取用户名
+     */
     public String getUserFromToken(String token) {
         String user = Jwts.parser().setSigningKey(tokenSignKey).parseClaimsJws(token).getBody().getSubject();
         return user;
@@ -44,7 +50,9 @@ public class TokenManager {
      * @return
      */
     public boolean checkToken(String jwtToken) {
-        if(StringUtils.isEmpty(jwtToken)) return false;
+        if(StringUtils.isEmpty(jwtToken)) {
+            return false;
+        }
         try {
             Jwts.parser().setSigningKey(tokenSignKey).parseClaimsJws(jwtToken);
         } catch (Exception e) {

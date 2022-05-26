@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author sunbo.2000
+ */
 @RestController
 @RequestMapping("/admin/acl/index")
-//@CrossOrigin
 public class IndexController {
 
     @Autowired
@@ -31,7 +33,6 @@ public class IndexController {
 
     /**
      * 获取菜单
-     * @return
      */
     @GetMapping("menu")
     public R getMenu(){

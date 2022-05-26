@@ -23,12 +23,16 @@ public class R {
     private Map<String, Object> data = new HashMap<>();
 
 
-    //使用链式编程
-    //构造方法私有化
+    /**
+     * 使用链式编程
+     * 构造方法私有化
+     */
     private R() {
     }
 
-    //成功方法
+    /**
+     * 成功方法
+     */
     public static R ok() {
         R r = new R();
         r.setSuccess(true);
@@ -37,7 +41,9 @@ public class R {
         return r;
     }
 
-    //失败方法
+    /**
+     * 失败方法
+     */
     public static R error() {
         R r = new R();
         r.setSuccess(false);

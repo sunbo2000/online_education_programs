@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    //全局异常处理
+    /**
+     * 全局异常处理
+     */
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public R error(Exception e) {
@@ -24,7 +26,9 @@ public class GlobalExceptionHandler {
         return R.error().message("服务器报错了,快去康康");
     }
 
-    //自定义异常处理
+    /**
+     * 自定义异常处理
+     */
     @ExceptionHandler(MoguException.class)
     @ResponseBody
     public R error(MoguException me){

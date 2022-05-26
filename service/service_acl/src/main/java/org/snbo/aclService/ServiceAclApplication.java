@@ -6,6 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.ComponentScan;
 
+/**
+ * @author sunbo.2000
+ */
 @SpringBootApplication
 @EnableDiscoveryClient
 @ComponentScan(basePackages = {"org.snbo"})

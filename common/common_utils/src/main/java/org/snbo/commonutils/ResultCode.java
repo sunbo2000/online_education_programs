@@ -6,8 +6,12 @@ package org.snbo.commonutils;
  */
 
 public interface ResultCode {
-    //成功状态
-    public static final Integer SUCCESS = 20000;
-    //失败状态
-    public static final Integer ERROR = 20001;
+    /**
+     * 成功状态
+     */
+    Integer SUCCESS = 20000;
+    /**
+     * 失败状态
+     */
+    Integer ERROR = 20001;
 }

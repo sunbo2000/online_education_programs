@@ -29,8 +29,10 @@ public class EduSubjectController {
     @Autowired
     private EduSubjectService subjectService;
 
-    //添加课程分类
-    //获取上传过来的文件,把文件内容读取出来
+    /**
+     * 添加课程分类
+     * 获取上传过来的文件,把文件内容读取出来
+     */
     @PostMapping
     @ApiOperation(value = "(增)根据excel表格添加课程分类数据")
     public R addSubject(MultipartFile file){
@@ -38,7 +40,9 @@ public class EduSubjectController {
         return R.ok();
     }
 
-    //获取课程分类数据
+    /**
+     * 获取课程分类数据
+     */
     @GetMapping
     @ApiOperation(value = "(查)查询所有课程分类数据")
     public R getAll(){

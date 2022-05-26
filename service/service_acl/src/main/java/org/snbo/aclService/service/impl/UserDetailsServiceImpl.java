@@ -32,20 +32,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private PermissionService permissionService;
 
-    /***
+    /**
      * 根据账号获取用户信息
-     * @param username:
-     * @return: org.springframework.security.core.userdetails.UserDetails
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // 从数据库中取出用户信息
         User user = userService.selectByUsername(username);
-
-        // 判断用户是否存在
-        if (null == user) {
-            //throw new UsernameNotFoundException("用户名不存在！");
-        }
         // 返回UserDetails实现类
         // 讲师数据库中查询的用户转换为SpringSecurity需要的登录用户类型
         org.snbo.SpringScurity.entity.User curUser = new org.snbo.SpringScurity.entity.User();

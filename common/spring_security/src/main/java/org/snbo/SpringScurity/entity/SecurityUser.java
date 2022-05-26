@@ -23,10 +23,14 @@ import java.util.List;
 @Slf4j
 public class SecurityUser implements UserDetails {
 
-    //当前登录用户
+    /**
+     * 当前登录用户
+     */
     private transient User currentUserInfo;
 
-    //当前权限
+    /**
+     * 当前权限
+     */
     private List<String> permissionValueList;
 
     public SecurityUser() {
@@ -42,7 +46,9 @@ public class SecurityUser implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> authorities = new ArrayList<>();
         for (String permissionValue : permissionValueList) {
-            if (StringUtils.isEmpty(permissionValue)) continue;
+            if (StringUtils.isEmpty(permissionValue)) {
+                continue;
+            }
             SimpleGrantedAuthority authority = new SimpleGrantedAuthority(permissionValue);
             authorities.add(authority);
         }

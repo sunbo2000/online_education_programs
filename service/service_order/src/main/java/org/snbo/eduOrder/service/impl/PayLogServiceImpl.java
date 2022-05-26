@@ -12,6 +12,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.snbo.eduOrder.utils.HttpClient;
 import org.snbo.servicebase.ExceptionHandler.MoguException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -32,6 +33,8 @@ import java.util.concurrent.TimeUnit;
 public class PayLogServiceImpl extends ServiceImpl<PayLogMapper, PayLog> implements PayLogService {
 
     @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
+    @Autowired
     private OrderService orderService;
 
     //生成二维码
@@ -39,6 +42,14 @@ public class PayLogServiceImpl extends ServiceImpl<PayLogMapper, PayLog> impleme
     public Map<String, Object> createNative(String orderNo) {
 
         try {
+            //如果redis里面有记录的话,直接返回就好,不必重复生成二维码(否则前端刷新一次就会有新的支付二维码)
+            Map<String, Object> map3 = (Map<String, Object>) redisTemplate.opsForValue().get(orderNo);
+            if (map3 != null) {
+                Long time = redisTemplate.getExpire(orderNo, TimeUnit.SECONDS);
+                map3.put("time", time);
+                return map3;
+            }
+
             //根据订单号查询订单信息
             QueryWrapper<Order> wrapper = new QueryWrapper<>();
             wrapper.eq("order_no", orderNo);
@@ -73,8 +84,9 @@ public class PayLogServiceImpl extends ServiceImpl<PayLogMapper, PayLog> impleme
             map1.put("total_fee", order.getTotalFee());
             map1.put("result_code", resultMap.get("result_code"));
             map1.put("code_url", resultMap.get("code_url"));
+            map1.put("time", 1800);
             //微信支付二维码2小时过期，可采取2小时未支付取消订单
-            //redisTemplate.opsForValue().set(orderNo, map, 120,TimeUnit.MINUTES);
+            redisTemplate.opsForValue().set(orderNo, map1, 30, TimeUnit.MINUTES);
             return map1;
         } catch (Exception e) {
             e.printStackTrace();
@@ -122,7 +134,9 @@ public class PayLogServiceImpl extends ServiceImpl<PayLogMapper, PayLog> impleme
         QueryWrapper<Order> wrapper = new QueryWrapper<>();
         wrapper.eq("order_no", orderNo);
         Order order = orderService.getOne(wrapper);
-        if (order.getStatus() == 1) return;
+        if (order.getStatus() == 1) {
+            return;
+        }
         order.setStatus(1);
         orderService.updateById(order);
         //记录支付日志

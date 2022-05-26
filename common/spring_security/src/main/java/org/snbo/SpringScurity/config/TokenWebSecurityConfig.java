@@ -52,8 +52,6 @@ public class TokenWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * 配置设置
-     * @param http
-     * @throws Exception
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -76,8 +74,6 @@ public class TokenWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * 密码处理
-     * @param auth
-     * @throws Exception
      */
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -86,8 +82,6 @@ public class TokenWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * 配置哪些请求不拦截
-     * @param web
-     * @throws Exception
      */
     @Override
     public void configure(WebSecurity web) throws Exception {

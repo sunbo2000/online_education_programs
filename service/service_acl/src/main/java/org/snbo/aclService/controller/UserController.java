@@ -28,7 +28,6 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/admin/acl/user")
-//@CrossOrigin
 public class UserController {
 
     @Autowired
@@ -103,7 +102,7 @@ public class UserController {
     @ApiOperation(value = "根据用户分配角色")
     @PostMapping("/doAssign")
     public R doAssign(@RequestParam String userId,@RequestParam String[] roleId) {
-        roleService.saveUserRoleRealtionShip(userId,roleId);
+        roleService.saveUserRoleRelationShip(userId,roleId);
         return R.ok();
     }
 }

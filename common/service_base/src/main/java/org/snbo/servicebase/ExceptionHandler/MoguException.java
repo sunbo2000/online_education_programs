@@ -13,16 +13,22 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MoguException extends RuntimeException {
-    //状态码
+    /**
+     * 状态码
+     */
     private Integer code;
-    //异常信息
+    /**
+     * 异常信息
+     */
     private String msg;
 
 
-    //自行重写 toString 方法, lombok 重写的方法输出的是 meg ,而我们这里需要 message
+    /**
+     * 自行重写 toString 方法, lombok 重写的方法输出的是 meg ,而我们这里需要 message
+     */
     @Override
     public String toString() {
-        return "GuliException{" +
+        return "MoguException{" +
                 "message=" + msg +
                 ", code=" + code +
                 '}';
